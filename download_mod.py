@@ -3,7 +3,7 @@ import requests
 import glob
 import hashlib
 
-RELATIVE_MOD_PATH = 'Factorio/mods/'
+RELATIVE_MOD_PATH = 'mods/'
 USERNAME = 'username'
 TOKEN = 'token'
 
