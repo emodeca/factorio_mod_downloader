@@ -1,6 +1,6 @@
 # factorio_mod_downloader
 
-This script is for downloading enabled mods from mods/mod-list.json.  It's ideal for debugging mods compatibility crashes on start up stage.
+This script is for downloading enabled mods from mods/mod-list.json.  It's ideal for debugging mods compatibility crashes on data stage.
 
 ### Use in Factorio's root folder
 1. Copy download_mod.py to Factorio's root.
