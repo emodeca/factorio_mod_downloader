@@ -8,11 +8,15 @@ USERNAME = 'username'
 TOKEN = 'token'
 
 
-def has_downloaded(mod_name):
-    if mod_name == 'base':
+def has_downloaded(mod):
+    if mod['name'] == 'base':
         return True
 
-    filenames = glob.glob(f"{RELATIVE_MOD_PATH}{mod_name}_*.zip")
+    if 'version' in mod:
+        filenames = glob.glob(f"{RELATIVE_MOD_PATH}{mod['name']}_{mod['version']}.zip")
+    else:
+        filenames = glob.glob(f"{RELATIVE_MOD_PATH}{mod['name']}_*.zip")
+
     if len(filenames):
         return True
 
@@ -51,7 +55,7 @@ def download_mods():
     with open(f"{RELATIVE_MOD_PATH}mod-list.json") as json_string:
         json_obj = json.load(json_string)
         for mod in json_obj['mods']:
-            if  mod['enabled'] and not has_downloaded(mod['name']):
+            if mod['enabled'] and not has_downloaded(mod):
                 download_mod(mod)
 
 
