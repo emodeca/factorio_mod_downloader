@@ -31,22 +31,28 @@ def download_file(download_obj):
         print(f"Download Failed {download_obj['file_name']}")
 
 
-def download_mod(mod_name):
-    url = f"https://mods.factorio.com/api/mods/{mod_name}"
+def download_mod(mod):
+    url = f"https://mods.factorio.com/api/mods/{mod['name']}"
     r = requests.get(url, allow_redirects=True)
     if r.status_code == 200:
         json_object = json.loads(r.text)
-        download_file(json_object['releases'][-1])
+        if 'version' in mod:
+            for release in json_object['releases']:
+                if release['version'] == mod['version']:
+                    download_file(release)
+        else:
+            download_file(json_object['releases'][-1])
+
     else:
-        print(f"Unable to download mod info: {mod_name}")
+        print(f"Unable to download mod info: {mod['name']}")
 
 
 def download_mods():
     with open(f"{RELATIVE_MOD_PATH}mod-list.json") as json_string:
         json_obj = json.load(json_string)
-        for mods in json_obj['mods']:
-            if not has_downloaded(mods['name']) and mods['enabled']:
-                download_mod(mods['name'])
+        for mod in json_obj['mods']:
+            if  mod['enabled'] and not has_downloaded(mod['name']):
+                download_mod(mod)
 
 
 if __name__ == '__main__':
