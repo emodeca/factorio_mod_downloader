@@ -4,12 +4,12 @@ import glob
 import hashlib
 
 RELATIVE_MOD_PATH = 'mods/'
-USERNAME = 'username'
-TOKEN = 'token'
+USERNAME = 'emodeca'
+TOKEN = '60eb2d1120eba632a09dcd4521c7ba'
 
 
 def has_downloaded(mod):
-    if mod['name'] == 'base':
+    if mod['name'] == 'base' or mod['name'] == 'quality' or mod['name'] == 'elevated-rails' or mod['name'] == 'space-age':
         return True
 
     if 'version' in mod:
